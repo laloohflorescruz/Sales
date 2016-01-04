@@ -15,3 +15,14 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#tableBlock {
+    width:auto;
+}
+#editBlock {
+    display:none;
+    float:right;
+}
+#createBlock {
+    float:right;
+}
