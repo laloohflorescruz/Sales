@@ -199,8 +199,6 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Book2Controller.cs" />
-    <Compile Include="Controllers\Book3Controller.cs" />
-    <Compile Include="Controllers\Book4Controller.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainController.cs" />
@@ -1035,7 +1033,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <None Include="Views\Book4\Index.cshtml" />
     <Content Include="main.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
@@ -1058,7 +1055,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Book3\Index.cshtml" />
     <Content Include="Views\Main\Index.cshtml" />
     <Content Include="Views\Main\SecondAngularPage.cshtml" />
   </ItemGroup>
