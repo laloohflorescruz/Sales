@@ -5,9 +5,23 @@
 </head>
 
 <body ng-controller="mainController">
-    <h1>Angular Playground</h1>
-    {{message}}
-    <br />Total Length: {{message.length}}
+<h1>Angular Playground</h1>
+{{message}}
+<br/>Total Length: {{message.length}}
 </body>
+
+<script>
+    function mainController($scope) {
+        $scope.message = "Hello, Michael";
+    }
+
+    angular
+        .module("appName", [])
+        .controller("mainController", mainController);
+
+
+
+</script> 
+
 
 </html>
