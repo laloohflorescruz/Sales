@@ -1,68 +1,100 @@
 ﻿<!doctype html>
-<html ng-app="purchaseApp">
+<html ng-app="bookApp">
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 </head>
-<body ng-controller="purchaseController">
-    <div class="page-header">
-        <h1> Список покупок </h1>
+<body ng-controller="bookController">
+
+<div>
+    <div>
+        token - {{token}} triggerShowAdminPanel - {{triggerShowAdminPanel}}  triggerShowTokenPanel - {{triggerShowTokenPanel}} 
     </div>
-    <div class="panel">
-        <div class="form-inline">
-            <div class="form-group">
-                <div class="col-md-8">
-                    <input class="form-control" ng-model="text" placeholder="Название" />
-                </div>
+    <div>
+        <a href ng-click="triggerShowAdminPanel = !triggerShowAdminPanel">Админка</a>
+        <div ng-show="triggerShowAdminPanel">
+            <input class="form-control" ng-model="login" placeholder="Логин" />
+            <input type="password" class="form-control" ng-model="pass" placeholder="Пароль" />
+            <button class="btn btn-default" ng-click="showAdminPanel(login, pass)">Открыть админку</button>
+            {{resultAdmin}}
+            {{resultAdmin2}}
+        </div>
+    </div>
+    <div>
+        <a href ng-click="triggerShowTokenPanel = !triggerShowTokenPanel">Вход на Sale</a>
+        <div ng-show="triggerShowTokenPanel">
+            <div>
+                <input class="form-control" ng-model="tempToken" placeholder="Токен" />
+                <button class="btn btn-default" ng-click="checkToken(tempToken)">Войти на Sale по токену</button>
             </div>
-            <div class="form-group">
-                <div class="col-md-6">
-                    <input type="number" class="form-control" ng-model="price" placeholder="Цена" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-8">
-                    <button class="btn btn-default" ng-click="addItem(text, price)">Добавить</button>
-                </div>
+            <div>
+                <button class="btn btn-default" ng-click="createNewToken()">Получить новый токен и войти на Sale</button>
             </div>
         </div>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Предмет</th>
-                    <th>Цена</th>
-                    <th>Куплено</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="item in list.items">
-                    <td>{{item.purchase}}</td>
-                    <td>{{item.price}}</td>
-                    <td><input type="checkbox" ng-model="item.done" /></td>
-                </tr>
-            </tbody>
-        </table>
     </div>
+</div>
+    <!--
 
+<div class="form-inline">
+    <div class="form-group">
+        <div class="col-md-8">
+            <input class="form-control" ng-model="text" placeholder="Название"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-6">
+            <input type="number" class="form-control" ng-model="price" placeholder="Цена"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-8">
+            <button class="btn btn-default" ng-click="addItem(text, price)">Добавить</button>
+        </div>
+    </div>
+</div>
+        -->
     <script>
-        var model = {
-            items: [
-                { purchase: "Хлеб", done: false, price: 15.9 },
-                { purchase: "Масло", done: false, price: 60 },
-                { purchase: "Картофель", done: true, price: 22.6 },
-                { purchase: "Сыр", done: false, price: 310 }
-            ]
-        };
-        angular.module("purchaseApp", []).controller("purchaseController", function ($scope) {
-            $scope.list = model;
-            $scope.addItem = function (text, price) {
-                price = parseFloat(price); // преобразуем введенное значение к числу
-                if (text !== "" && !isNaN(price)) // если текст установлен и введено число, то добавляем
-                {
-                    $scope.list.items.push({ purchase: text, price: price, done: false });
-                }
-            }
-        });
+
+        angular.module("bookApp", []).controller("bookController", function ($scope, $http) {
+            $scope.triggerShowAdminPanel = false;
+            $scope.triggerShowTokenPanel = false;
+
+
+        $scope.createNewToken = function() {
+            $scope.token = "dadadsadad";
+            
+            $scope.resultAdmin = "false";
+        }
+
+        $scope.showAdminPanel = function (login, pass) {
+            var admin = {
+                Login: login,
+                Pass: pass
+            };
+
+            $http.post("/api/authenticateAdmin/",admin).
+                success(function(data) {
+                    $scope.resultAdmin2 = data;
+                    $scope.loaded = true;
+                });
+
+            /*
+            
+            */
+
+
+            $scope.resultAdmin = admin;
+        }
+        
+  /*
+    $scope.list = model;
+    $scope.addItem = function (text, price) {
+        price = parseFloat(price); // преобразуем введенное значение к числу
+        if(text != "" && !isNaN(price)) // если текст установлен и введено число, то добавляем
+        {
+            $scope.list.items.push({ purchase: text, price: price, done: false });
+        }
+    }
+    */
+});
     </script>
 </body>
 </html>

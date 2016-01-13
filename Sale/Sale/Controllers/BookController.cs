@@ -20,8 +20,7 @@ namespace Sale.Controllers
         // GET: api/Book/5
         public Book Get(int id)
         {
-            var book = _context.Books.Find(id);
-            return book;
+            return _context.Books.Find(id);
         }
 
         // POST: api/Book

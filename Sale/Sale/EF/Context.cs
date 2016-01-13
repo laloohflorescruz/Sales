@@ -11,10 +11,12 @@ namespace Sale.EF
         { }
 
         public DbSet<Book> Books { get; set; }
+        public DbSet<Admin> Admin { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new BooksConfigurator());
+            modelBuilder.Configurations.Add(new AdminConfigurator());
         }
          
     }
